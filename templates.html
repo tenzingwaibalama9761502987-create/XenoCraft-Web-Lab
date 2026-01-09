@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>XenoCraft Web Lab – Explore Designs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #020617;
+      color: #e5e9f0;
+    }
+
+    .page-title {
+      text-align: center;
+      padding: 24px 12px;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #38bdf8;
+      text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 16px;
+      padding: 14px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    }
+
+    .thumb {
+      width: 100%;
+      height: 160px;
+      background: #0f172a;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #94a3b8;
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+    }
+
+    .name {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .category {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4ade80;
+      margin-bottom: 12px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      text-align: center;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Explore Website Designs</div>
+
+  <div class="grid">
+
+    <!-- EXAMPLE TEMPLATE CARD -->
+    <div class="card">
+      <div class="thumb">School Template 1 (Preview Coming)</div>
+      <div class="name">Bright Future School Theme</div>
+      <div class="category">Category: School / Education</div>
+      <div class="price">NPR 15,000</div>
+      <div class="btn-row">
+        <div class="btn">View Preview</div>
+        <div class="btn" onclick="window.location.href='https://wa.me/9779761502987'">Order Now</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">Hospital Template 1 (Preview Coming)</div>
+      <div class="name">Clean Health Pro Theme</div>
+      <div class="category">Category: Hospital / Clinic</div>
+      <div class="price">NPR 18,000</div>
+      <div class="btn-row">
+        <div class="btn">View Preview</div>
+        <div class="btn" onclick="window.location.href='https://wa.me/9779761502987'">Order Now</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">3D Futuristic Template</div>
+      <div class="name">XenoCraft 3D Neon Theme</div>
+      <div class="category">Category: Futuristic / 3D</div>
+      <div class="price">NPR 25,000</div>
+      <div class="btn-row">
+        <div class="btn">View Preview</div>
+        <div class="btn" onclick="window.location.href='https://wa.me/9779761502987'">Order Now</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "booking",
+    "label": "Booking / Admission Form",
+    "priceNpr": 1500,
+    "tierMin": 1,
+    "desc": "Admission/booking form with structured fields (client email + WhatsApp share).",
+    "tags": ["form", "automation", "school", "booking"],
+    "active": true,
+    "sort": 10,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "gallery",
+    "label": "Photo Gallery + Lightbox",
+    "priceNpr": 1200,
+    "tierMin": 1,
+    "desc": "Responsive gallery with lightbox preview and optimized image loading.",
+    "tags": ["photos", "ui", "portfolio", "lightbox"],
+    "active": true,
+    "sort": 9,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "news",
+    "label": "Notice / News Module",
+    "priceNpr": 1500,
+    "tierMin": 1,
+    "desc": "Notice board / news section with date + category layout (static or admin-ready).",
+    "tags": ["updates", "school", "content", "notices"],
+    "active": true,
+    "sort": 9,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "seo",
+    "label": "SEO Boost Pack",
+    "priceNpr": 2000,
+    "tierMin": 1,
+    "desc": "Meta tags + sitemap + performance fixes + basic Search Console readiness.",
+    "tags": ["seo", "google", "speed", "meta"],
+    "active": true,
+    "sort": 8,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "blog",
+    "label": "Blog / Articles Section",
+    "priceNpr": 2000,
+    "tierMin": 1,
+    "desc": "Blog listing + article page template (admin-ready structure).",
+    "tags": ["content", "news", "articles", "blog"],
+    "active": true,
+    "sort": 8,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "chatbot",
+    "label": "AI Chatbot / FAQ",
+    "priceNpr": 5000,
+    "tierMin": 2,
+    "desc": "FAQ chatbot UI (WhatsApp-style) + smart replies (rules-based or API-ready).",
+    "tags": ["ai", "support", "faq", "chat"],
+    "active": true,
+    "sort": 7,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "admin",
+    "label": "Admin Panel (Basic)",
+    "priceNpr": 2500,
+    "tierMin": 2,
+    "desc": "Simple admin to edit text/images/pages (JSON-based now, server upgrade later).",
+    "tags": ["cms", "manage", "panel", "admin"],
+    "active": true,
+    "sort": 7,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "threeD",
+    "label": "3D Visuals / Animations",
+    "priceNpr": 4000,
+    "tierMin": 2,
+    "desc": "3D/animated hero sections and motion effects (lightweight, performance-safe).",
+    "tags": ["3d", "animations", "education", "motion"],
+    "active": true,
+    "sort": 6,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "shop",
+    "label": "Simple Product / Shop Page",
+    "priceNpr": 3500,
+    "tierMin": 2,
+    "desc": "Catalog-style product page (no payment) with CTA to WhatsApp/order.",
+    "tags": ["shop", "catalog", "business", "products"],
+    "active": true,
+    "sort": 6,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  },
+  {
+    "id": "multilang",
+    "label": "Multi-language (2 Languages)",
+    "priceNpr": 2500,
+    "tierMin": 2,
+    "desc": "Two-language UI (English + Nepali) with clean switcher setup.",
+    "tags": ["language", "nepali", "i18n", "translate"],
+    "active": true,
+    "sort": 5,
+    "createdAt": "2026-01-09",
+    "updatedAt": "2026-01-09"
+  }
+]

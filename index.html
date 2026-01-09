@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>XenoCraft Web Lab – Futuristic Web Design Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="XenoCraft Web Lab builds secure, futuristic websites with neon UI, 3D sections and custom pricing.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#020617;
+      --bg-alt:#050816;
+      --bg-soft:#0b1120;
+      --text:#e5e9f0;
+      --soft:#9ca3af;
+      --accent:#4f46e5;
+      --accent2:#22d3ee;
+      --border: rgba(148,163,184,.45);
+      --radius:18px;
+      --neon: 0 0 12px rgba(34,211,238,.75), 0 0 18px rgba(79,70,229,.55);
+      --danger:#ef4444;
+      --ok:#22c55e;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      background:
+        radial-gradient(circle at 10% 0%, rgba(34,211,238,.16), transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(79,70,229,.18), transparent 45%),
+        radial-gradient(circle at top, #1e293b, #020617);
+      color:var(--text);
+      font-family:Poppins, sans-serif;
+      scroll-behavior:smooth;
+    }
+    a{color:inherit;text-decoration:none}
+
+    header{
+      position: sticky; top:0;
+      background: rgba(2,6,23,.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index:100;
+    }
+    .nav-inner{
+      max-width:1200px; margin:auto;
+      padding:12px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+    }
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-mark{
+      width:36px;height:36px;border-radius:999px;
+      background: radial-gradient(circle, var(--accent2), var(--accent));
+      box-shadow: var(--neon);
+      position:relative;
+    }
+    .logo-mark::after{
+      content:"X";
+      font-family:Orbitron;
+      font-size:18px;
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      color:#020617; font-weight:700;
+    }
+    nav ul{display:flex;gap:10px;list-style:none;flex-wrap:wrap}
+    nav a{
+      color:var(--soft);
+      padding:6px 10px;border-radius:999px;
+      transition:.2s;
+    }
+    nav a:hover{
+      background: rgba(34,211,238,.12);
+      color:var(--accent2);
+      box-shadow:var(--neon);
+    }
+    .btn{
+      padding:8px 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius:999px;
+      border:none; color:#020617;
+      cursor:pointer;
+      font-size:12px; letter-spacing:.08em;
+      transition:.2s;
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    .btn:hover{transform: translateY(-2px); box-shadow: var(--neon);}
+
+    .page{max-width:1200px;margin:auto;padding:20px}
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap:20px;
+      padding: 40px 0;
+      align-items:stretch;
+    }
+    .badge{
+      font-size:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      display:inline-flex;
+      gap:6px;
+      color:var(--soft);
+    }
+    .hero h1{font-size:34px; margin:10px 0; line-height:1.2;}
+    .hero h1 span{
+      background: linear-gradient(135deg, #fff, #8ec5ff, var(--accent2));
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+    .hero-sub{color:var(--soft);font-size:13px;margin-bottom:16px}
+
+    .section-head{margin:40px 0 16px}
+    .section-title{font-size:22px;font-weight:600}
+    .section-sub{font-size:13px;color:var(--soft);max-width:720px}
+
+    .industry-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .industry-card{
+      padding: 12px;
+      background: rgba(5,8,22,.7);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      box-shadow: inset 0 0 18px rgba(34,211,238,.06);
+    }
+
+    select, input, textarea{
+      width:100%;
+      background: rgba(11,17,32,.75);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      outline: none;
+    }
+    select:focus, input:focus, textarea:focus{
+      border-color: var(--accent2);
+      box-shadow: var(--neon);
+    }
+    label{display:block;font-size:12px;color:var(--soft);margin-bottom:6px}
+    .field{margin-bottom:12px}
+
+    /* PACKAGES */
+    .tier-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:16px;
+    }
+    .tier-card{
+      background: rgba(5,8,22,.7);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: inset 0 0 22px rgba(34,211,238,.08);
+      transition:.2s;
+      position:relative;
+      overflow:hidden;
+    }
+    .tier-card:hover{
+      border-color: var(--accent2);
+      box-shadow: var(--neon);
+      transform: translateY(-2px);
+    }
+    .tier-card.popular{
+      border-color: rgba(34,211,238,.55);
+      box-shadow: 0 0 1px rgba(34,211,238,.35), var(--neon);
+      transform: translateY(-4px);
+    }
+    .tier-badge{
+      position:absolute; top:12px; right:12px;
+      font-size:10px; padding:4px 8px; border-radius:999px;
+      border:1px solid rgba(34,211,238,.35);
+      color: var(--accent2);
+      background: rgba(2,6,23,.55);
+    }
+    .tier-title{font-size:15px;font-weight:600;margin-bottom:4px}
+    .tier-price{font-size:13px;color:var(--accent2);margin-bottom:8px}
+    .tier-desc{font-size:12px;color:var(--soft);margin-bottom:10px}
+    .tier-list{padding-left:16px;color:var(--soft);font-size:12px;line-height:1.5}
+    .tier-list li{margin-bottom:6px}
+    .tier-btn{
+      margin-top:10px; width:100%;
+      padding:10px; border-radius:10px;
+      background: rgba(11,17,32,.6);
+      color: var(--soft);
+      border: 1px solid rgba(148,163,184,.45);
+      cursor:pointer;
+    }
+    .tier-btn:hover{border-color:var(--accent2);color:var(--accent2);box-shadow:var(--neon)}
+    .tier-cta{
+      margin-top:10px;width:100%;
+      padding:10px;border-radius:10px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color:#020617;border:none;font-weight:600;cursor:pointer;
+    }
+    .tier-cta.secondary{
+      background: transparent;
+      color: var(--accent2);
+      border: 1px solid rgba(34,211,238,.45);
+    }
+
+    /* Compare */
+    .compare{
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(2,6,23,.35);
+    }
+    .compare table{
+      width:100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size:12px;
+      color: var(--soft);
+    }
+    .compare th, .compare td{
+      padding:10px 12px;
+      border-bottom:1px solid rgba(148,163,184,.25);
+      text-align:left;
+      vertical-align:middle;
+    }
+    .compare th{color: var(--text); font-weight:600; background: rgba(11,17,32,.65);}
+    .compare tr:hover td{background: rgba(34,211,238,.06)}
+    .yes{color:var(--ok);font-weight:600}
+    .no{color:var(--danger);font-weight:600}
+    .maybe{color:var(--accent2);font-weight:600}
+    .col-tier2{box-shadow: inset 0 0 0 9999px rgba(34,211,238,.04)}
+
+    /* Designer */
+    .order-wrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:12px;
+    }
+    .order-card{
+      background: rgba(5,8,22,.7);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: inset 0 0 18px rgba(34,211,238,.05);
+    }
+    .order-note{margin-top:10px;font-size:11px;color: var(--soft);}
+
+    #designList{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap:12px;
+    }
+    .design-card{
+      background: rgba(2,6,23,.82);
+      border: 1px solid rgba(34,211,238,.30);
+      border-radius: 14px;
+      padding: 12px;
+      cursor:pointer;
+      box-shadow: inset 0 0 20px rgba(34,211,238,.12);
+      transition:.2s;
+    }
+    .design-card:hover{
+      border-color: var(--accent2);
+      box-shadow: 0 0 12px rgba(34,211,238,.55), inset 0 0 25px rgba(34,211,238,.18);
+      transform: translateY(-2px);
+    }
+    .design-card.selected{
+      border-color: var(--accent2);
+      box-shadow: 0 0 20px rgba(34,211,238,.75), inset 0 0 35px rgba(34,211,238,.22);
+    }
+    .design-thumb-wrap{
+      width:100%;
+      height:110px;
+      border-radius:10px;
+      overflow:hidden;
+      margin-bottom:8px;
+      background: radial-gradient(circle at top, rgba(34,211,238,.2), rgba(15,23,42,.95));
+      display:flex;align-items:center;justify-content:center;
+      font-size:10px;color: var(--soft);
+    }
+    .design-thumb-wrap img{width:100%;height:100%;object-fit:cover}
+    .design-title{font-size:13px;margin-bottom:2px;color: var(--accent2)}
+    .design-meta{font-size:11px;color: var(--soft)}
+
+    #featureList{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap:8px;
+    }
+    .feature-btn{
+      padding: 9px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(11,17,32,.65);
+      color: var(--text);
+      font-size: 11px;
+      cursor:pointer;
+      transition:.15s;
+      text-align:left;
+    }
+    .feature-btn small{display:block;color:var(--soft);font-size:10px;margin-top:2px}
+    .feature-btn.active{
+      border-color:var(--ok);
+      color:var(--ok);
+      box-shadow: 0 0 10px rgba(34,197,94,.30);
+    }
+
+    /* Modals */
+    .modal-backdrop{
+      position:fixed; inset:0;
+      background: rgba(2,6,23,.75);
+      backdrop-filter: blur(10px);
+      display:none;
+      align-items:center; justify-content:center;
+      padding:16px;
+      z-index:9999;
+    }
+    .modal-backdrop.show{display:flex}
+    .modal-card{
+      width:min(760px, 100%);
+      background: rgba(5,8,22,.92);
+      border:1px solid rgba(34,211,238,.35);
+      border-radius: 18px;
+      box-shadow: var(--neon);
+      padding:16px;
+    }
+    .modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .modal-title{font-size:16px;font-weight:700}
+    .modal-sub{font-size:12px;color:var(--soft);margin-top:2px}
+    .modal-close{
+      background:transparent;
+      border:1px solid rgba(148,163,184,.45);
+      color: var(--soft);
+      border-radius:10px;
+      padding:6px 10px;
+      cursor:pointer;
+    }
+    .modal-body{margin-top:12px;color:var(--soft);font-size:12px;line-height:1.6}
+    .modal-actions{display:flex;gap:10px;margin-top:14px}
+    .modal-actions .tier-cta{width:auto;flex:1}
+
+    footer{
+      margin-top:40px;
+      padding:20px;
+      text-align:center;
+      font-size:12px;
+      color: var(--soft);
+      border-top:1px solid var(--border);
+    }
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns: 1fr}
+      .order-wrap{grid-template-columns: 1fr}
+      nav{display:none}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <div>
+        <div style="font-family:Orbitron;font-size:14px;">XENOCRAFT WEB LAB</div>
+        <div style="font-size:11px;color:var(--soft);">Futuristic Web Design • Neon UI • 3D Ready</div>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#designer">Designs</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#order">Order</a></li>
+        <li><a href="#payment">Payment</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn" href="https://wa.me/9779761502987" target="_blank" rel="noreferrer">WhatsApp</a>
+  </div>
+</header>
+
+<main class="page">
+
+<section id="hero" class="hero">
+  <div>
+    <div class="badge"><span>🔹</span> Custom futuristic websites – Nepal based</div>
+    <h1>Build your <span>premium futuristic website</span> with XenoCraft Web Lab.</h1>
+    <p class="hero-sub">
+      Neon UI • 3D Sections • AI Chatbot • Secure Delivery.
+      Schools, hospitals, restaurants, portfolios, business sites — all custom.
+    </p>
+    <a class="btn" href="#packages">See Packages</a>
+  </div>
+
+  <div style="padding:20px;border:1px solid var(--border);border-radius:20px;background:rgba(5,8,22,.7);box-shadow:var(--neon);">
+    <p style="font-size:12px;color:var(--soft);">Live futuristic mockup</p>
+    <div style="height:180px;border-radius:14px;margin-top:10px;background:linear-gradient(135deg,#0f172a,#1e293b);box-shadow:inset 0 0 20px rgba(34,211,238,.25);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--soft);">
+      3D interactive preview space (future)
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="section-head">
+    <div class="section-title">Packages & Options</div>
+    <div class="section-sub">
+      Three clear tiers so clients understand what they get, why the cost changes,
+      and which level is right. (Double click a tier for full details.)
+    </div>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier-card" data-tier="1">
+      <div class="tier-badge">Starter</div>
+      <div class="tier-title">💎 Tier 1 — Basic Website</div>
+      <div class="tier-price">3,500 – 6,000 NPR</div>
+      <div class="tier-desc">Best for small shops, freelancers, cafes and startups.</div>
+      <ul class="tier-list">
+        <li>3–5 pages</li><li>Responsive design</li><li>Contact form</li>
+        <li>Basic SEO</li><li>SSL (HTTPS)</li><li>Basic security hardening</li><li>Fast loading</li>
+      </ul>
+      <button class="tier-btn" type="button">View Details</button>
+      <button class="tier-cta secondary" type="button" onclick="pickTierAndGo(1)">Choose this Tier</button>
+    </div>
+
+    <div class="tier-card popular" data-tier="2">
+      <div class="tier-badge">Most Popular</div>
+      <div class="tier-title">💎 Tier 2 — Standard / Advanced</div>
+      <div class="tier-price">8,000 – 15,000 NPR</div>
+      <div class="tier-desc">For schools, clinics, institutes, growing businesses.</div>
+      <ul class="tier-list">
+        <li>6–12 pages</li><li>Better UI/UX</li><li>Forms + auto reply</li>
+        <li>Basic admin updates</li><li>Booking/admission forms</li>
+        <li>Cloudflare + firewall setup</li><li>SEO + analytics</li><li>Speed optimization</li>
+      </ul>
+      <button class="tier-btn" type="button">View Details</button>
+      <button class="tier-cta" type="button" onclick="pickTierAndGo(2)">Get Started (Recommended)</button>
+    </div>
+
+    <div class="tier-card" data-tier="3">
+      <div class="tier-badge">Enterprise / AI</div>
+      <div class="tier-title">💎 Tier 3 — Full AI / Enterprise</div>
+      <div class="tier-price">80,000 – 2,50,000+ NPR</div>
+      <div class="tier-desc">For hospitals, colleges, corporates, e-commerce, serious systems.</div>
+      <ul class="tier-list">
+        <li>10–25 custom pages</li><li>AI chatbot (FAQ + smart replies)</li><li>Full admin dashboard</li>
+        <li>Database integration</li><li>Automation + notifications</li><li>High-level security</li><li>Cloud deployment</li>
+      </ul>
+      <button class="tier-btn" type="button">View Details</button>
+      <button class="tier-cta" type="button" onclick="pickTierAndGo(3)">Talk to Consultant</button>
+    </div>
+  </div>
+</section>
+
+<section id="designer">
+  <div class="section-head">
+    <div class="section-title">Choose Your Website Design</div>
+    <div class="section-sub">
+      Pick a design, select extra features, and instantly calculate price in NPR (no random values).
+    </div>
+  </div>
+
+  <div class="order-wrap">
+    <div class="order-card">
+      <h3 style="font-size:15px;margin-bottom:10px;">1. Choose Category & Design</h3>
+
+      <div class="field">
+        <label for="designCategory">Category</label>
+        <select id="designCategory">
+          <option value="school">School / Education</option>
+          <option value="hospital">Hospital / Clinic</option>
+          <option value="business">Business / Services</option>
+          <option value="restaurant">Restaurant / Shop</option>
+          <option value="portfolio">Portfolio / Personal</option>
+          <option value="tech">Tech / Cyber / Lab</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Available Designs (click select • double click preview)</label>
+        <div id="designList"></div>
+      </div>
+
+      <div class="order-note">If thumbnails don’t load, it still works — it will show “No preview yet”.</div>
+    </div>
+
+    <div class="order-card">
+      <h3 style="font-size:15px;margin-bottom:10px;">2. Add Features (NPR)</h3>
+
+      <div class="field">
+        <label>Extra Features</label>
+        <div id="featureList"></div>
+      </div>
+
+      <div class="field">
+        <label>Price Summary</label>
+        <div style="font-size:12px;background:rgba(11,17,32,.65);border-radius:12px;border:1px solid var(--border);padding:12px;">
+          <div>Base Price: <b id="basePriceDisplay">NPR 0</b></div>
+          <div>Extras: <b id="featureCostDisplay">NPR 0</b></div>
+          <div style="margin-top:8px;font-size:15px;">Total: <b id="totalPriceDisplay">NPR 0</b></div>
+          <div style="font-size:10px;color:var(--soft);margin-top:4px;">
+            Final price may change if you request extra pages or custom systems.
+          </div>
+        </div>
+      </div>
+
+      <button class="btn" id="waQuoteBtn" type="button">Send Selection to WhatsApp</button>
+      <div class="order-note">Sends design + features + total estimate to WhatsApp automatically.</div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yearSpan"></span> XenoCraft Web Lab — All rights reserved.</footer>
+
+<!-- Tier modal -->
+<div id="tierModal" class="modal-backdrop" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <div>
+        <div id="modalTitle" class="modal-title">Tier</div>
+        <div id="modalPrice" class="modal-sub">Price</div>
+      </div>
+      <button class="modal-close" type="button" onclick="closeTierModal()">✕</button>
+    </div>
+    <div id="modalBody" class="modal-body"></div>
+    <div class="modal-actions">
+      <button class="tier-cta secondary" type="button" onclick="closeTierModal()">Close</button>
+      <button class="tier-cta" type="button" onclick="pickTierAndGo(window.__tierPick || 2)">Choose & Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- Design modal -->
+<div id="designModal" class="modal-backdrop" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <div>
+        <div id="designModalTitle" class="modal-title">Design Preview</div>
+        <div id="designModalSub" class="modal-sub">NPR 0</div>
+      </div>
+      <button class="modal-close" type="button" onclick="closeDesignModal()">✕</button>
+    </div>
+    <div id="designModalBody" class="modal-body"></div>
+    <div class="modal-actions">
+      <button class="tier-cta secondary" type="button" onclick="closeDesignModal()">Close</button>
+      <button class="tier-cta" type="button" onclick="selectDesignFromModal()">Select this Design</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* year */
+document.getElementById("yearSpan").textContent = new Date().getFullYear();
+
+/* ===== Tier Modal ===== */
+const tierDetails = {
+  1: { title:"Tier 1 — Basic Website", price:"3,500 – 6,000 NPR", html:`<b>Why this cost:</b><ul><li>Small site (1–3 days)</li><li>Basic setup + SSL</li><li>Low backend complexity</li></ul><b>Best for:</b><ul><li>Shops</li><li>Freelancers</li><li>Startups</li></ul>` },
+  2: { title:"Tier 2 — Standard / Advanced", price:"8,000 – 15,000 NPR", html:`<b>Why this cost:</b><ul><li>More pages + content</li><li>Forms + admin updates</li><li>Security + speed tuning</li></ul><b>Best for:</b><ul><li>Schools</li><li>Clinics</li><li>Businesses</li></ul>` },
+  3: { title:"Tier 3 — Full AI / Enterprise", price:"80,000 – 2,50,000+ NPR", html:`<b>Why this cost:</b><ul><li>AI + integration work</li><li>Dashboard + database</li><li>High security responsibility</li></ul><b>Best for:</b><ul><li>Hospitals</li><li>Colleges</li><li>Enterprise</li></ul>` }
+};
+
+function openTierModal(tier){
+  window.__tierPick = tier;
+  const m = document.getElementById("tierModal");
+  document.getElementById("modalTitle").textContent = tierDetails[tier].title;
+  document.getElementById("modalPrice").textContent = tierDetails[tier].price;
+  document.getElementById("modalBody").innerHTML = tierDetails[tier].html;
+  m.classList.add("show");
+  m.setAttribute("aria-hidden","false");
+}
+function closeTierModal(){
+  const m = document.getElementById("tierModal");
+  m.classList.remove("show");
+  m.setAttribute("aria-hidden","true");
+}
+function pickTierAndGo(){
+  closeTierModal();
+  location.hash = "#designer";
+}
+
+/* ===== Data + NPR ===== */
+async function loadJSON(path){
+  const res = await fetch(path + "?v=" + Date.now());
+  if(!res.ok) throw new Error("Failed loading: " + path);
+  return await res.json();
+}
+
+let designData = [];
+let featureData = [];
+let selectedDesign = null;
+let selectedFeatures = new Set();
+let __modalDesign = null;
+
+function npr(num){
+  const n = Number(num) || 0;
+  return "NPR " + n.toLocaleString("en-US");
+}
+
+/* ===== Design Modal ===== */
+function openDesignModal(design){
+  __modalDesign = design;
+  const m = document.getElementById("designModal");
+
+  document.getElementById("designModalTitle").textContent = design.name || "Design";
+  document.getElementById("designModalSub").textContent = npr(design.baseNpr);
+
+  const img = design.thumb
+    ? `<img src="${design.thumb}" alt="Preview" style="width:100%;border-radius:14px;border:1px solid rgba(148,163,184,.35);">`
+    : `<div style="padding:14px;border-radius:14px;border:1px dashed rgba(148,163,184,.45);">No preview image yet.</div>`;
+
+  document.getElementById("designModalBody").innerHTML = `
+    ${img}
+    <div style="margin-top:10px;">
+      <b>Category:</b> ${design.cat || "-"}<br>
+      <b>Base Price:</b> ${npr(design.baseNpr)}
+    </div>
+  `;
+
+  m.classList.add("show");
+  m.setAttribute("aria-hidden","false");
+}
+function closeDesignModal(){
+  const m = document.getElementById("designModal");
+  m.classList.remove("show");
+  m.setAttribute("aria-hidden","true");
+}
+function selectDesignFromModal(){
+  if(__modalDesign) selectDesign(__modalDesign.id);
+  closeDesignModal();
+}
+
+/* ===== Render Designs ===== */
+function renderDesignsForCategory(cat){
+  const container = document.getElementById("designList");
+  container.innerHTML = "";
+
+  const list = designData.filter(d => d.cat === cat);
+  if(list.length === 0){
+    container.textContent = "No designs available for this category.";
+    selectedDesign = null;
+    updatePriceSummary();
+    return;
+  }
+
+  list.forEach(d => {
+    const div = document.createElement("div");
+    div.className = "design-card";
+    div.setAttribute("data-design-id", d.id); // IMPORTANT FIX
+
+    const imgPart = d.thumb
+      ? `<img src="${d.thumb}" alt="${d.name} preview">`
+      : `<div>No preview yet</div>`;
+
+    div.innerHTML = `
+      <div class="design-thumb-wrap">${imgPart}</div>
+      <div class="design-title">${d.name}</div>
+      <div class="design-meta">Base: ${npr(d.baseNpr)}</div>
+    `;
+
+    div.addEventListener("click", () => selectDesign(d.id));
+    div.addEventListener("dblclick", () => openDesignModal(d));
+    container.appendChild(div);
+  });
+
+  selectDesign(list[0].id);
+}
+
+function selectDesign(designId){
+  const d = designData.find(x => x.id === designId);
+  if(!d) return;
+
+  selectedDesign = d;
+  document.querySelectorAll(".design-card").forEach(card => card.classList.remove("selected"));
+  document.querySelector(`.design-card[data-design-id="${designId}"]`)?.classList.add("selected");
+  updatePriceSummary();
+}
+
+/* ===== Render Features ===== */
+function renderFeatures(){
+  const container = document.getElementById("featureList");
+  container.innerHTML = "";
+  selectedFeatures = new Set();
+
+  featureData.forEach(f => {
+    const price = Number(f.priceNpr) || 0;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "feature-btn";
+    btn.innerHTML = `${f.label}<small>+ ${npr(price)}</small>`;
+
+    btn.onclick = () => {
+      if(selectedFeatures.has(f.id)){
+        selectedFeatures.delete(f.id);
+        btn.classList.remove("active");
+      }else{
+        selectedFeatures.add(f.id);
+        btn.classList.add("active");
+      }
+      updatePriceSummary();
+    };
+
+    container.appendChild(btn);
+  });
+}
+
+function calcExtrasTotal(){
+  let sum = 0;
+  featureData.forEach(f => {
+    if(selectedFeatures.has(f.id)){
+      sum += (Number(f.priceNpr) || 0);
+    }
+  });
+  return sum;
+}
+
+function updatePriceSummary(){
+  const base = selectedDesign ? (Number(selectedDesign.baseNpr) || 0) : 0;
+  const extras = calcExtrasTotal();
+  const total = base + extras;
+
+  document.getElementById("basePriceDisplay").textContent = npr(base);
+  document.getElementById("featureCostDisplay").textContent = npr(extras);
+  document.getElementById("totalPriceDisplay").textContent = npr(total);
+}
+
+function sendWhatsAppQuote(){
+  const base = selectedDesign ? (Number(selectedDesign.baseNpr) || 0) : 0;
+  const extras = calcExtrasTotal();
+  const total = base + extras;
+
+  let msg = "XenoCraft Web Lab – Design Selection (NPR)\n\n";
+
+  if(selectedDesign){
+    msg += `Design: ${selectedDesign.name}\n`;
+    msg += `Category: ${selectedDesign.cat}\n`;
+    msg += `Base Price: NPR ${base.toLocaleString()}\n\n`;
+  }
+
+  msg += `Extra Features:\n`;
+  if(selectedFeatures.size === 0){
+    msg += " - None\n";
+  }else{
+    featureData.forEach(f => {
+      if(selectedFeatures.has(f.id)){
+        msg += ` - ${f.label} (+NPR ${(Number(f.priceNpr)||0).toLocaleString()})\n`;
+      }
+    });
+  }
+
+  msg += `\nTotal Estimate: NPR ${total.toLocaleString()}\n`;
+  msg += "Please confirm final price & timeline.\n";
+
+  window.open("https://wa.me/9779761502987?text=" + encodeURIComponent(msg), "_blank");
+}
+
+/* ===== Init ===== */
+async function initDesignSelector(){
+  try{
+    designData = await loadJSON("database/designs.json");
+    featureData = await loadJSON("database/features.json");
+  }catch(err){
+    console.error(err);
+    alert("JSON load failed. Check database/designs.json and database/features.json paths.");
+    return;
+  }
+
+  renderDesignsForCategory("school");
+  renderFeatures();
+
+  document.getElementById("designCategory").addEventListener("change", e => {
+    renderDesignsForCategory(e.target.value);
+  });
+
+  document.getElementById("waQuoteBtn").addEventListener("click", sendWhatsAppQuote);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".tier-card").forEach(card => {
+    const tier = Number(card.dataset.tier);
+    card.addEventListener("dblclick", () => openTierModal(tier));
+    card.querySelector(".tier-btn")?.addEventListener("click", () => openTierModal(tier));
+  });
+
+  document.getElementById("tierModal")?.addEventListener("click", (e) => {
+    if(e.target.id === "tierModal") closeTierModal();
+  });
+
+  document.getElementById("designModal")?.addEventListener("click", (e) => {
+    if(e.target.id === "designModal") closeDesignModal();
+  });
+
+  initDesignSelector();
+});
+</script>
+
+</main>
+</body>
+</html>
