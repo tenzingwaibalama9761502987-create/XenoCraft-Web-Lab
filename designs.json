@@ -1,6 +1,7 @@
 [
   {
     "id": "school1",
+    "slug": "bright-future-school",
     "cat": "school",
     "name": "Bright Future School",
     "tier": 1,
@@ -11,13 +12,15 @@
     "desc": "Landing + About + Contact + Admissions CTA. Fast, trusted layout for schools.",
     "tags": ["school", "education", "landing", "admission", "fast", "trusted"],
     "thumb": "assets/designs/school1.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 10,
+    "sort": 100,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   },
   {
     "id": "school2",
+    "slug": "galaxy-academy-3d",
     "cat": "school",
     "name": "Galaxy Academy 3D",
     "tier": 2,
@@ -28,13 +31,15 @@
     "desc": "Premium school UI with 3D-ready hero sections and modern admissions flow.",
     "tags": ["school", "education", "3d", "premium", "neon", "admissions"],
     "thumb": "assets/designs/school2.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 9,
+    "sort": 90,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   },
   {
     "id": "school3",
+    "slug": "minimal-result-portal",
     "cat": "school",
     "name": "Minimal Result Portal",
     "tier": 1,
@@ -45,13 +50,15 @@
     "desc": "Best for results + notices. Clean UX, fast loading, strong readability.",
     "tags": ["school", "education", "results", "notices", "clean", "fast"],
     "thumb": "assets/designs/school3.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 8,
+    "sort": 80,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   },
   {
     "id": "hospital1",
+    "slug": "clean-health-pro",
     "cat": "hospital",
     "name": "Clean Health Pro",
     "tier": 2,
@@ -62,13 +69,15 @@
     "desc": "Clinic website with appointment-ready structure and trust-focused design.",
     "tags": ["hospital", "clinic", "health", "appointments", "trust", "clean"],
     "thumb": "assets/designs/hospital1.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 10,
+    "sort": 75,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   },
   {
     "id": "business1",
+    "slug": "corporate-minimal",
     "cat": "business",
     "name": "Corporate Minimal",
     "tier": 1,
@@ -79,13 +88,15 @@
     "desc": "Professional business site with services + pricing + lead capture layout.",
     "tags": ["business", "services", "pricing", "lead", "minimal", "modern"],
     "thumb": "assets/designs/business1.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 10,
+    "sort": 70,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   },
   {
     "id": "restaurant1",
+    "slug": "restaurant-menu-glow",
     "cat": "restaurant",
     "name": "Restaurant Menu Glow",
     "tier": 1,
@@ -96,13 +107,15 @@
     "desc": "Menu-first design with strong CTA for call, map, and social proof.",
     "tags": ["restaurant", "food", "menu", "contact", "map", "reviews"],
     "thumb": "assets/designs/restaurant1.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 10,
+    "sort": 65,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   },
   {
     "id": "portfolio1",
+    "slug": "cyber-portfolio-grid",
     "cat": "portfolio",
     "name": "Cyber Portfolio Grid",
     "tier": 1,
@@ -113,13 +126,15 @@
     "desc": "Personal portfolio with project grid + CV layout + contact section.",
     "tags": ["portfolio", "personal", "cv", "projects", "grid", "cyber"],
     "thumb": "assets/designs/portfolio1.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 10,
+    "sort": 60,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   },
   {
     "id": "tech1",
+    "slug": "cyber-lab-dashboard",
     "cat": "tech",
     "name": "Cyber Lab Dashboard",
     "tier": 2,
@@ -130,8 +145,9 @@
     "desc": "Dark neon cyber layout with dashboard-ready sections and high-tech feel.",
     "tags": ["tech", "cyber", "dashboard", "dark-ui", "lab", "neon"],
     "thumb": "assets/designs/tech1.png",
+    "previewUrl": "",
     "active": true,
-    "sort": 10,
+    "sort": 55,
     "createdAt": "2026-01-09",
     "updatedAt": "2026-01-09"
   }
