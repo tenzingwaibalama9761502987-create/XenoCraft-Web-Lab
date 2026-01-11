@@ -36,7 +36,7 @@
     }
     a{color:inherit;text-decoration:none}
 
-    /* ✅ Matrix canvas at the very back */
+    /* Matrix canvas */
     #matrix-bg{
       position: fixed;
       inset: 0;
@@ -47,7 +47,7 @@
       opacity: .35;
     }
 
-    /* ✅ Fog overlay (premium glow) */
+    /* Fog overlay */
     .bg-fog{
       position: fixed;
       inset: 0;
@@ -61,7 +61,6 @@
       opacity: .55;
     }
 
-    /* ✅ Keep UI above background layers */
     header, main, footer{ position: relative; z-index: 2; }
 
     header{
@@ -69,7 +68,7 @@
       background: rgba(2,6,23,.72);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      z-index: 200; /* higher than content */
+      z-index: 200;
     }
 
     .nav-inner{
@@ -168,7 +167,6 @@
     label{display:block;font-size:12px;color:var(--soft);margin-bottom:6px}
     .field{margin-bottom:12px}
 
-    /* PACKAGES */
     .tier-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
@@ -228,7 +226,6 @@
       border: 1px solid rgba(34,211,238,.45);
     }
 
-    /* Designer */
     .order-wrap{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -278,8 +275,9 @@
       background: radial-gradient(circle at top, rgba(34,211,238,.2), rgba(15,23,42,.95));
       display:flex;align-items:center;justify-content:center;
       font-size:10px;color: var(--soft);
+      border: 1px solid rgba(148,163,184,.25);
     }
-    .design-thumb-wrap img{width:100%;height:100%;object-fit:cover}
+    .design-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block}
     .design-title{font-size:13px;margin-bottom:2px;color: var(--accent2)}
     .design-meta{font-size:11px;color: var(--soft)}
 
@@ -306,7 +304,6 @@
       box-shadow: 0 0 10px rgba(34,197,94,.30);
     }
 
-    /* ✅ Modals always above everything */
     .modal-backdrop{
       position:fixed; inset:0;
       background: rgba(2,6,23,.75);
@@ -360,7 +357,6 @@
 </head>
 
 <body>
-  <!-- ✅ Background layers -->
   <canvas id="matrix-bg"></canvas>
   <div class="bg-fog"></div>
 
@@ -379,9 +375,6 @@
           <li><a href="#hero">Home</a></li>
           <li><a href="#packages">Packages</a></li>
           <li><a href="#designer">Designs</a></li>
-          <li><a href="#industries">Industries</a></li>
-          <li><a href="#order">Order</a></li>
-          <li><a href="#payment">Payment</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -410,9 +403,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ✅ YOUR ORIGINAL CONTENT -->
-    <!-- (kept exactly as you pasted) -->
 
     <section id="packages">
       <div class="section-head">
@@ -495,7 +485,7 @@
             <div id="designList"></div>
           </div>
 
-          <div class="order-note">If thumbnails don’t load, it still works — it will show “No preview yet”.</div>
+          <div class="order-note">If images don’t load → check path (designs/... vs assets/designs/...).</div>
         </div>
 
         <div class="order-card">
@@ -564,18 +554,10 @@
 
   </main>
 
-  <!-- ✅ Matrix script (cache bust for GitHub Pages) -->
-  <script src="assets/js/matrix.js?v=1"></script>
+  <!-- Matrix (optional) -->
+  <script src="assets/js/matrix.js?v=2"></script>
 
-  <!-- ✅ Debug helper (only console, safe) -->
   <script>
-    // If matrix.js fails to load, you will not see this console log from inside matrix.js
-    console.log("index.html loaded ✅ (If Matrix missing -> check assets/js/matrix.js path)");
-  </script>
-
-  <!-- ✅ Your exact JS (UNCHANGED) -->
-  <script>
-    /* year */
     document.getElementById("yearSpan").textContent = new Date().getFullYear();
 
     /* ===== Tier Modal ===== */
@@ -604,10 +586,26 @@
       location.hash = "#designer";
     }
 
+    /* ✅ Robust JSON loader (supports array OR {designs:[...]}) */
     async function loadJSON(path){
       const res = await fetch(path + "?v=" + Date.now());
-      if(!res.ok) throw new Error("Failed loading: " + path);
+      if(!res.ok) throw new Error("Failed loading: " + path + " (" + res.status + ")");
       return await res.json();
+    }
+
+    /* ✅ Fix image path automatically */
+    function normalizeThumbPath(p){
+      if(!p) return "";
+      // if already absolute URL
+      if(/^https?:\/\//i.test(p)) return p;
+      // remove leading slash (so GitHub Pages works)
+      p = p.replace(/^\/+/, "");
+      return p;
+    }
+
+    function npr(num){
+      const n = Number(num) || 0;
+      return "NPR " + n.toLocaleString("en-US");
     }
 
     let designData = [];
@@ -616,9 +614,15 @@
     let selectedFeatures = new Set();
     let __modalDesign = null;
 
-    function npr(num){
-      const n = Number(num) || 0;
-      return "NPR " + n.toLocaleString("en-US");
+    function safeGetDesignArray(raw){
+      // If file is array: [...]
+      if(Array.isArray(raw)) return raw;
+
+      // If file is object: { designs:[...] }
+      if(raw && Array.isArray(raw.designs)) return raw.designs;
+
+      // otherwise
+      return [];
     }
 
     function openDesignModal(design){
@@ -628,14 +632,15 @@
       document.getElementById("designModalTitle").textContent = design.name || "Design";
       document.getElementById("designModalSub").textContent = npr(design.baseNpr);
 
-      const img = design.thumb
-        ? `<img src="${design.thumb}" alt="Preview" style="width:100%;border-radius:14px;border:1px solid rgba(148,163,184,.35);">`
+      const src = normalizeThumbPath(design.thumb);
+      const img = src
+        ? `<img src="${src}" alt="Preview" style="width:100%;border-radius:14px;border:1px solid rgba(148,163,184,.35);" onerror="this.outerHTML='<div style=&quot;padding:14px;border-radius:14px;border:1px dashed rgba(148,163,184,.45);&quot;>Image not found:<br><code>${src}</code></div>'">`
         : `<div style="padding:14px;border-radius:14px;border:1px dashed rgba(148,163,184,.45);">No preview image yet.</div>`;
 
       document.getElementById("designModalBody").innerHTML = `
         ${img}
         <div style="margin-top:10px;">
-          <b>Category:</b> ${design.cat || "-"}<br>
+          <b>Category:</b> ${(design.cat || design.category || "-")}<br>
           <b>Base Price:</b> ${npr(design.baseNpr)}
         </div>
       `;
@@ -657,7 +662,11 @@
       const container = document.getElementById("designList");
       container.innerHTML = "";
 
-      const list = designData.filter(d => d.cat === cat);
+      // cat can be in "cat" or "category"
+      const list = designData.filter(d => (d.cat || d.category) === cat);
+
+      console.log("[designs] render category:", cat, "count:", list.length);
+
       if(list.length === 0){
         container.textContent = "No designs available for this category.";
         selectedDesign = null;
@@ -670,13 +679,14 @@
         div.className = "design-card";
         div.setAttribute("data-design-id", d.id);
 
-        const imgPart = d.thumb
-          ? `<img src="${d.thumb}" alt="${d.name} preview">`
+        const src = normalizeThumbPath(d.thumb);
+        const imgPart = src
+          ? `<img src="${src}" alt="${d.name} preview" onerror="this.style.display='none'; this.parentElement.innerHTML='<div>No preview (404)</div>';">`
           : `<div>No preview yet</div>`;
 
         div.innerHTML = `
           <div class="design-thumb-wrap">${imgPart}</div>
-          <div class="design-title">${d.name}</div>
+          <div class="design-title">${d.name || "Untitled"}</div>
           <div class="design-meta">Base: ${npr(d.baseNpr)}</div>
         `;
 
@@ -694,7 +704,7 @@
 
       selectedDesign = d;
       document.querySelectorAll(".design-card").forEach(card => card.classList.remove("selected"));
-      document.querySelector(\`.design-card[data-design-id="\${designId}"]\`)?.classList.add("selected");
+      document.querySelector(`.design-card[data-design-id="${designId}"]`)?.classList.add("selected");
       updatePriceSummary();
     }
 
@@ -754,7 +764,7 @@
 
       if(selectedDesign){
         msg += `Design: ${selectedDesign.name}\n`;
-        msg += `Category: ${selectedDesign.cat}\n`;
+        msg += `Category: ${(selectedDesign.cat || selectedDesign.category)}\n`;
         msg += `Base Price: NPR ${base.toLocaleString()}\n\n`;
       }
 
@@ -777,11 +787,22 @@
 
     async function initDesignSelector(){
       try{
-        designData = await loadJSON("database/designs.json");
-        featureData = await loadJSON("database/features.json");
+        const rawDesigns = await loadJSON("database/designs.json");
+        const rawFeatures = await loadJSON("database/features.json");
+
+        // ✅ Supports BOTH formats
+        designData = safeGetDesignArray(rawDesigns);
+        featureData = Array.isArray(rawFeatures) ? rawFeatures : (rawFeatures.features || []);
+
+        // ✅ Normalize thumbs
+        designData = designData.map(d => ({ ...d, thumb: normalizeThumbPath(d.thumb) }));
+
+        console.log("[designs] loaded:", designData.length, designData.slice(0,3));
+        console.log("[features] loaded:", featureData.length);
+
       }catch(err){
         console.error(err);
-        alert("JSON load failed. Check database/designs.json and database/features.json paths.");
+        alert("JSON load failed. Open console (F12) to see error.\n\nMost common: wrong path or GitHub Pages not updated yet.");
         return;
       }
 
