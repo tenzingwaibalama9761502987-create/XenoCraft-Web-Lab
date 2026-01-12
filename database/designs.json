@@ -9,25 +9,17 @@
     "currency": "NPR",
     "pages": { "min": 3, "max": 5 },
     "badge": "Starter",
-    "desc": "Fast, trusted school site: Landing + About + Contact + Admissions CTA. Perfect for quick launch.",
-    "highlights": [
-      "Admissions CTA + inquiry form ready",
-      "Mobile-first layout for parents/students",
-      "Clean sections: Notices, Events, Gallery (optional)"
-    ],
-    "deliverables": [
-      "Landing/Home",
-      "About",
-      "Admissions CTA",
-      "Contact"
-    ],
+    "desc": "Landing + About + Contact + Admissions CTA. Fast, trusted layout for schools.",
     "tags": ["school", "education", "landing", "admission", "fast", "trusted"],
     "thumb": "designs/school1.png",
     "previewUrl": "",
     "active": true,
     "sort": 100,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 2, "max": 4 },
+    "highlights": ["Admissions CTA", "Mobile-first", "Speed optimized"],
+    "sections": ["Hero", "About", "Programs", "Admissions CTA", "Contact"]
   },
   {
     "id": "school2",
@@ -39,27 +31,17 @@
     "currency": "NPR",
     "pages": { "min": 6, "max": 10 },
     "badge": "Popular",
-    "desc": "Premium school UI with 3D-ready hero and modern admissions flow. High conversion look.",
-    "highlights": [
-      "3D/animated hero-ready sections",
-      "Admissions funnel layout (Apply → Submit → Contact)",
-      "Best for branding + premium feel"
-    ],
-    "deliverables": [
-      "Home (Premium)",
-      "About",
-      "Admissions",
-      "Notices/News",
-      "Gallery",
-      "Contact"
-    ],
+    "desc": "Premium school UI with 3D-ready hero sections and modern admissions flow.",
     "tags": ["school", "education", "3d", "premium", "neon", "admissions"],
     "thumb": "designs/school2.png",
     "previewUrl": "",
     "active": true,
     "sort": 90,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 4, "max": 8 },
+    "highlights": ["3D-ready hero", "Premium UI", "Better animations"],
+    "sections": ["Hero", "Academics", "Facilities", "Admissions Flow", "Gallery", "Contact"]
   },
   {
     "id": "school3",
@@ -71,25 +53,17 @@
     "currency": "NPR",
     "pages": { "min": 4, "max": 6 },
     "badge": "Results Focus",
-    "desc": "Best for results + notices. Clean UX, fast loading, strong readability on mobile.",
-    "highlights": [
-      "Results + Notices structure (easy navigation)",
-      "Readable typography + clean layout",
-      "Fast loading for slow networks"
-    ],
-    "deliverables": [
-      "Home",
-      "Results",
-      "Notices",
-      "Contact"
-    ],
+    "desc": "Best for results + notices. Clean UX, fast loading, strong readability.",
     "tags": ["school", "education", "results", "notices", "clean", "fast"],
     "thumb": "designs/school3.png",
     "previewUrl": "",
     "active": true,
     "sort": 80,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 3, "max": 6 },
+    "highlights": ["Notices", "Results module layout", "Readable typography"],
+    "sections": ["Hero", "Notices", "Downloads", "Results", "Contact"]
   },
   {
     "id": "hospital1",
@@ -101,26 +75,17 @@
     "currency": "NPR",
     "pages": { "min": 5, "max": 8 },
     "badge": "Clinic Pro",
-    "desc": "Clinic website with appointment-ready structure and trust-focused design for patients.",
-    "highlights": [
-      "Appointment CTA structure",
-      "Doctor/Services sections ready",
-      "Trust blocks: testimonials, timings, location"
-    ],
-    "deliverables": [
-      "Home",
-      "Services",
-      "Doctors/Team",
-      "Appointments",
-      "Contact"
-    ],
+    "desc": "Clinic website with appointment-ready structure and trust-focused design.",
     "tags": ["hospital", "clinic", "health", "appointments", "trust", "clean"],
     "thumb": "designs/hospital1.png",
     "previewUrl": "",
     "active": true,
     "sort": 75,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 3, "max": 7 },
+    "highlights": ["Appointment CTA", "Trust sections", "Services layout"],
+    "sections": ["Hero", "Services", "Doctors", "Timings", "Appointment CTA", "Contact"]
   },
   {
     "id": "business1",
@@ -132,25 +97,17 @@
     "currency": "NPR",
     "pages": { "min": 3, "max": 6 },
     "badge": "Business",
-    "desc": "Professional business site with services + pricing + lead capture layout. Clean and modern.",
-    "highlights": [
-      "Services + pricing ready sections",
-      "Lead capture CTA blocks",
-      "Professional corporate feel"
-    ],
-    "deliverables": [
-      "Home",
-      "Services",
-      "Pricing (optional)",
-      "Contact"
-    ],
+    "desc": "Professional business site with services + pricing + lead capture layout.",
     "tags": ["business", "services", "pricing", "lead", "minimal", "modern"],
     "thumb": "designs/business1.png",
     "previewUrl": "",
     "active": true,
     "sort": 70,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 2, "max": 5 },
+    "highlights": ["Service cards", "Lead capture", "Clean corporate UI"],
+    "sections": ["Hero", "Services", "Pricing", "Testimonials", "Contact"]
   },
   {
     "id": "restaurant1",
@@ -162,24 +119,17 @@
     "currency": "NPR",
     "pages": { "min": 3, "max": 5 },
     "badge": "Menu First",
-    "desc": "Menu-first design with strong CTA for call, map, and social proof. Fast conversions.",
-    "highlights": [
-      "Menu-first layout",
-      "Call + Map + WhatsApp CTA",
-      "Reviews/social proof blocks"
-    ],
-    "deliverables": [
-      "Home/Menu",
-      "About",
-      "Contact/Map"
-    ],
+    "desc": "Menu-first design with strong CTA for call, map, and social proof.",
     "tags": ["restaurant", "food", "menu", "contact", "map", "reviews"],
     "thumb": "designs/restaurant1.png",
     "previewUrl": "",
     "active": true,
     "sort": 65,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 2, "max": 4 },
+    "highlights": ["Menu layout", "Map + Call CTA", "Reviews block"],
+    "sections": ["Hero", "Menu", "Gallery", "Map", "Contact"]
   },
   {
     "id": "portfolio1",
@@ -191,25 +141,17 @@
     "currency": "NPR",
     "pages": { "min": 1, "max": 3 },
     "badge": "Personal",
-    "desc": "Personal portfolio with project grid + CV layout + contact section. Great for freelancers.",
-    "highlights": [
-      "Project grid layout",
-      "CV/About section",
-      "Contact CTA"
-    ],
-    "deliverables": [
-      "Single page (or up to 3 pages)",
-      "Projects",
-      "CV/About",
-      "Contact"
-    ],
+    "desc": "Personal portfolio with project grid + CV layout + contact section.",
     "tags": ["portfolio", "personal", "cv", "projects", "grid", "cyber"],
     "thumb": "designs/portfolio1.png",
     "previewUrl": "",
     "active": true,
     "sort": 60,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 1, "max": 3 },
+    "highlights": ["Project grid", "CV section", "Fast load"],
+    "sections": ["Hero", "Projects", "Skills", "CV", "Contact"]
   },
   {
     "id": "tech1",
@@ -221,26 +163,16 @@
     "currency": "NPR",
     "pages": { "min": 6, "max": 12 },
     "badge": "Tech Pro",
-    "desc": "Dark neon cyber layout with dashboard-ready sections and high-tech feel. Best for SaaS/IT labs.",
-    "highlights": [
-      "Dashboard-ready UI sections",
-      "Dark neon premium style",
-      "Great for tech services / security brands"
-    ],
-    "deliverables": [
-      "Home",
-      "Services/Features",
-      "Dashboard preview sections",
-      "Pricing",
-      "Blog/Updates (optional)",
-      "Contact"
-    ],
+    "desc": "Dark neon cyber layout with dashboard-ready sections and high-tech feel.",
     "tags": ["tech", "cyber", "dashboard", "dark-ui", "lab", "neon"],
     "thumb": "designs/tech1.png",
     "previewUrl": "",
     "active": true,
     "sort": 55,
     "createdAt": "2026-01-09",
-    "updatedAt": "2026-01-11"
+    "updatedAt": "2026-01-09",
+    "deliveryDays": { "min": 5, "max": 10 },
+    "highlights": ["Dashboard feel", "Neon cyber UI", "More sections"],
+    "sections": ["Hero", "Features", "Dashboard mock", "Pricing", "FAQ", "Contact"]
   }
 ]
