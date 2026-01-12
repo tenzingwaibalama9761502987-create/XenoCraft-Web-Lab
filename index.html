@@ -485,7 +485,7 @@
             <div id="designList"></div>
           </div>
 
-          <div class="order-note">If images don’t load → check path (designs/... vs assets/designs/...).</div>
+          <div class="order-note" id="pathHint"></div>
         </div>
 
         <div class="order-card">
@@ -510,6 +510,22 @@
 
           <button class="btn" id="waQuoteBtn" type="button">Send Selection to WhatsApp</button>
           <div class="order-note">Sends design + features + total estimate to WhatsApp automatically.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:40px;">
+      <div class="section-head">
+        <div class="section-title">Contact</div>
+        <div class="section-sub">Need a secure, modern site? Message us and we’ll show designs + suggest the best package.</div>
+      </div>
+      <div class="order-card">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-weight:600;">WhatsApp: +977 9761502987</div>
+            <div style="font-size:12px;color:var(--soft);margin-top:4px;">XenoCraft Web Lab • Nepal</div>
+          </div>
+          <a class="btn" href="https://wa.me/9779761502987" target="_blank" rel="noreferrer">Chat on WhatsApp</a>
         </div>
       </div>
     </section>
@@ -558,9 +574,24 @@
   <script src="assets/js/matrix.js?v=2"></script>
 
   <script>
+    // -------------------------
+    // ✅ GitHub Pages BASE FIX
+    // -------------------------
+    // If deployed at: https://user.github.io/REPO/
+    // then BASE should be "/REPO/"
+    const REPO_BASE = location.pathname.split("/").filter(Boolean)[0];
+    const BASE = REPO_BASE ? `/${REPO_BASE}/` : "/";
+
+    // Show quick path debug in UI (helps you confirm BASE)
+    document.getElementById("pathHint").textContent =
+      `Detected BASE: ${BASE}  (images will load from: ${BASE}designs/...)`;
+
+    // year
     document.getElementById("yearSpan").textContent = new Date().getFullYear();
 
-    /* ===== Tier Modal ===== */
+    // -------------------------
+    // ✅ Tier Modal
+    // -------------------------
     const tierDetails = {
       1: { title:"Tier 1 — Basic Website", price:"3,500 – 6,000 NPR", html:`<b>Why this cost:</b><ul><li>Small site (1–3 days)</li><li>Basic setup + SSL</li><li>Low backend complexity</li></ul><b>Best for:</b><ul><li>Shops</li><li>Freelancers</li><li>Startups</li></ul>` },
       2: { title:"Tier 2 — Standard / Advanced", price:"8,000 – 15,000 NPR", html:`<b>Why this cost:</b><ul><li>More pages + content</li><li>Forms + admin updates</li><li>Security + speed tuning</li></ul><b>Best for:</b><ul><li>Schools</li><li>Clinics</li><li>Businesses</li></ul>` },
@@ -586,21 +617,26 @@
       location.hash = "#designer";
     }
 
-    /* ✅ Robust JSON loader (supports array OR {designs:[...]}) */
+    // -------------------------
+    // ✅ Robust loaders + helpers
+    // -------------------------
     async function loadJSON(path){
-      const res = await fetch(path + "?v=" + Date.now());
-      if(!res.ok) throw new Error("Failed loading: " + path + " (" + res.status + ")");
+      const url = BASE + path.replace(/^\/+/, "");
+      const res = await fetch(url + "?v=" + Date.now());
+      if(!res.ok) throw new Error("Failed loading: " + url + " (" + res.status + ")");
       return await res.json();
     }
 
-    /* ✅ Fix image path automatically */
     function normalizeThumbPath(p){
       if(!p) return "";
-      // if already absolute URL
-      if(/^https?:\/\//i.test(p)) return p;
-      // remove leading slash (so GitHub Pages works)
-      p = p.replace(/^\/+/, "");
-      return p;
+      if(/^https?:\/\//i.test(p)) return p;     // absolute url ok
+      return p.replace(/^\/+/, "");             // remove leading slash
+    }
+
+    function toArrayMaybe(raw, key){
+      if(Array.isArray(raw)) return raw;
+      if(raw && Array.isArray(raw[key])) return raw[key];
+      return [];
     }
 
     function npr(num){
@@ -608,23 +644,18 @@
       return "NPR " + n.toLocaleString("en-US");
     }
 
+    // -------------------------
+    // ✅ App state
+    // -------------------------
     let designData = [];
     let featureData = [];
     let selectedDesign = null;
     let selectedFeatures = new Set();
     let __modalDesign = null;
 
-    function safeGetDesignArray(raw){
-      // If file is array: [...]
-      if(Array.isArray(raw)) return raw;
-
-      // If file is object: { designs:[...] }
-      if(raw && Array.isArray(raw.designs)) return raw.designs;
-
-      // otherwise
-      return [];
-    }
-
+    // -------------------------
+    // ✅ Design modal
+    // -------------------------
     function openDesignModal(design){
       __modalDesign = design;
       const m = document.getElementById("designModal");
@@ -632,9 +663,11 @@
       document.getElementById("designModalTitle").textContent = design.name || "Design";
       document.getElementById("designModalSub").textContent = npr(design.baseNpr);
 
-      const src = normalizeThumbPath(design.thumb);
+      const src = design.thumb ? (BASE + normalizeThumbPath(design.thumb)) : "";
       const img = src
-        ? `<img src="${src}" alt="Preview" style="width:100%;border-radius:14px;border:1px solid rgba(148,163,184,.35);" onerror="this.outerHTML='<div style=&quot;padding:14px;border-radius:14px;border:1px dashed rgba(148,163,184,.45);&quot;>Image not found:<br><code>${src}</code></div>'">`
+        ? `<img src="${src}" alt="Preview"
+             style="width:100%;border-radius:14px;border:1px solid rgba(148,163,184,.35);"
+             onerror="this.outerHTML='<div style=&quot;padding:14px;border-radius:14px;border:1px dashed rgba(148,163,184,.45);&quot;>Image not found:<br><code>${src}</code></div>'">`
         : `<div style="padding:14px;border-radius:14px;border:1px dashed rgba(148,163,184,.45);">No preview image yet.</div>`;
 
       document.getElementById("designModalBody").innerHTML = `
@@ -648,24 +681,29 @@
       m.classList.add("show");
       m.setAttribute("aria-hidden","false");
     }
+
     function closeDesignModal(){
       const m = document.getElementById("designModal");
       m.classList.remove("show");
       m.setAttribute("aria-hidden","true");
     }
+
     function selectDesignFromModal(){
       if(__modalDesign) selectDesign(__modalDesign.id);
       closeDesignModal();
     }
 
+    // -------------------------
+    // ✅ Render designs
+    // -------------------------
     function renderDesignsForCategory(cat){
       const container = document.getElementById("designList");
       container.innerHTML = "";
 
-      // cat can be in "cat" or "category"
-      const list = designData.filter(d => (d.cat || d.category) === cat);
-
-      console.log("[designs] render category:", cat, "count:", list.length);
+      const list = designData
+        .filter(d => d.active !== false)
+        .filter(d => (d.cat || d.category) === cat)
+        .sort((a,b) => (b.sort||0) - (a.sort||0));
 
       if(list.length === 0){
         container.textContent = "No designs available for this category.";
@@ -679,9 +717,10 @@
         div.className = "design-card";
         div.setAttribute("data-design-id", d.id);
 
-        const src = normalizeThumbPath(d.thumb);
+        const src = d.thumb ? (BASE + normalizeThumbPath(d.thumb)) : "";
         const imgPart = src
-          ? `<img src="${src}" alt="${d.name} preview" onerror="this.style.display='none'; this.parentElement.innerHTML='<div>No preview (404)</div>';">`
+          ? `<img src="${src}" alt="${d.name} preview"
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='<div>No preview (404)</div>';">`
           : `<div>No preview yet</div>`;
 
         div.innerHTML = `
@@ -708,6 +747,9 @@
       updatePriceSummary();
     }
 
+    // -------------------------
+    // ✅ Features
+    // -------------------------
     function renderFeatures(){
       const container = document.getElementById("featureList");
       container.innerHTML = "";
@@ -785,24 +827,34 @@
       window.open("https://wa.me/9779761502987?text=" + encodeURIComponent(msg), "_blank");
     }
 
+    // -------------------------
+    // ✅ Init
+    // -------------------------
     async function initDesignSelector(){
       try{
         const rawDesigns = await loadJSON("database/designs.json");
         const rawFeatures = await loadJSON("database/features.json");
 
-        // ✅ Supports BOTH formats
-        designData = safeGetDesignArray(rawDesigns);
-        featureData = Array.isArray(rawFeatures) ? rawFeatures : (rawFeatures.features || []);
+        designData = toArrayMaybe(rawDesigns, "designs");
+        featureData = toArrayMaybe(rawFeatures, "features");
 
-        // ✅ Normalize thumbs
+        // normalize thumb
         designData = designData.map(d => ({ ...d, thumb: normalizeThumbPath(d.thumb) }));
 
-        console.log("[designs] loaded:", designData.length, designData.slice(0,3));
-        console.log("[features] loaded:", featureData.length);
-
+        console.log("[BASE]", BASE);
+        console.log("[designs] loaded", designData.length, designData.slice(0,3));
+        console.log("[features] loaded", featureData.length, featureData.slice(0,3));
       }catch(err){
         console.error(err);
-        alert("JSON load failed. Open console (F12) to see error.\n\nMost common: wrong path or GitHub Pages not updated yet.");
+        alert(
+          "Load failed.\n\n" +
+          "1) Open console (F12)\n" +
+          "2) Check GitHub Pages is deploying ROOT (Settings → Pages)\n" +
+          "3) Confirm these URLs work:\n" +
+          `${BASE}database/designs.json\n` +
+          `${BASE}database/features.json\n` +
+          `${BASE}designs/school1.png`
+        );
         return;
       }
 
